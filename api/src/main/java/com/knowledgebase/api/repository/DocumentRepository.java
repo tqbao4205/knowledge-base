@@ -28,4 +28,6 @@ public interface DocumentRepository extends JpaRepository<Document, UUID> {
     long countByIsDeletedFalse();
 
     long countByIndexingStatusAndIsDeletedFalse(com.knowledgebase.api.domain.enums.DocumentIndexingStatus indexingStatus);
+
+    boolean existsByObjectKey(String objectKey);
 }

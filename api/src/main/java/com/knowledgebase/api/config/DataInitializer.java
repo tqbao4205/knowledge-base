@@ -28,6 +28,7 @@ public class DataInitializer implements CommandLineRunner {
     private final ProjectMemberRepository projectMemberRepository;
     private final DocumentRepository documentRepository;
     private final com.knowledgebase.api.service.MinioStorageService minioStorageService;
+    private final com.knowledgebase.api.service.ai.DocumentIngestionService documentIngestionService;
 
     @Override
     @Transactional
@@ -133,6 +134,17 @@ public class DataInitializer implements CommandLineRunner {
         createSampleDocument(demoProject, managerUser, "Huong_dan_su_dung_he_thong.md", "text/markdown",
                 "# Hướng dẫn sử dụng hệ thống Knowledge Base\n\n- **Owner**: Toàn quyền trên dự án và tài liệu.\n- **Manager**: Quản lý thành viên và tài liệu.\n- **Editor**: Quản lý tài liệu (tải lên, tải về, xóa).\n- **Viewer**: Chỉ xem và tải về tài liệu.");
 
+        // 4.5 Auto-ingest any documents remaining in PENDING state
+        documentRepository.findAll().stream()
+                .filter(d -> !Boolean.TRUE.equals(d.getIsDeleted()) && d.getIndexingStatus() == com.knowledgebase.api.domain.enums.DocumentIndexingStatus.PENDING)
+                .forEach(d -> {
+                    try {
+                        documentIngestionService.ingestDocumentAsync(d.getId());
+                    } catch (Exception e) {
+                        log.warn("Could not start background ingestion for documentId={}: {}", d.getId(), e.getMessage());
+                    }
+                });
+
         log.info("Demo project seeded successfully: '{}' with 4 members and sample documents.", demoProjectName);
     }
 
@@ -164,6 +176,10 @@ public class DataInitializer implements CommandLineRunner {
 
     private void createSampleDocument(Project project, User uploader, String filename, String mimeType, String content) {
         String objectKey = String.format("projects/%s/demo_%s", project.getId(), filename);
+        if (documentRepository.existsByObjectKey(objectKey)) {
+            return;
+        }
+
         byte[] bytes = content.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
         try {
@@ -172,22 +188,21 @@ public class DataInitializer implements CommandLineRunner {
             log.warn("Could not upload demo file to MinIO: {}", e.getMessage());
         }
 
-        boolean docExists = documentRepository.findAll().stream()
-                .anyMatch(d -> project.getId().equals(d.getProject().getId())
-                        && filename.equals(d.getOriginalName())
-                        && !Boolean.TRUE.equals(d.getIsDeleted()));
+        Document savedDoc = documentRepository.save(
+                Document.builder()
+                        .project(project)
+                        .originalName(filename)
+                        .fileType(mimeType)
+                        .fileSizeBytes((long) bytes.length)
+                        .objectKey(objectKey)
+                        .uploadedBy(uploader)
+                        .build()
+        );
 
-        if (!docExists) {
-            documentRepository.save(
-                    Document.builder()
-                            .project(project)
-                            .originalName(filename)
-                            .fileType(mimeType)
-                            .fileSizeBytes((long) bytes.length)
-                            .objectKey(objectKey)
-                            .uploadedBy(uploader)
-                            .build()
-            );
+        try {
+            documentIngestionService.ingestDocumentAsync(savedDoc.getId());
+        } catch (Exception e) {
+            log.warn("Could not trigger async ingestion for demo document '{}': {}", filename, e.getMessage());
         }
     }
 

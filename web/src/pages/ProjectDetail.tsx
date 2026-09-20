@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -23,7 +23,7 @@ import {
 import { projectApi } from '../api/project';
 import { documentApi } from '../api/document';
 import type { ProjectDetail, ProjectRole } from '../types/project';
-import type { DocumentItem } from '../types/document';
+import type { DocumentItem, DocumentIndexingStatus } from '../types/document';
 import { useAuthStore } from '../store/authStore';
 import { AppleSegmentedControl, type SegmentOption } from '../components/AppleSegmentedControl';
 import { SpotlightSearch, type FileFilterCategory } from '../components/SpotlightSearch';
@@ -153,9 +153,9 @@ export const ProjectDetailView: React.FC = () => {
     }
   };
 
-  const fetchDocuments = async () => {
+  const fetchDocuments = async (silent = false) => {
     if (!id) return;
-    setIsLoadingDocs(true);
+    if (!silent) setIsLoadingDocs(true);
     try {
       const res = await documentApi.getDocuments(id);
       if (res.success && res.data) {
@@ -164,7 +164,7 @@ export const ProjectDetailView: React.FC = () => {
     } catch {
       // Handled by interceptor
     } finally {
-      setIsLoadingDocs(false);
+      if (!silent) setIsLoadingDocs(false);
     }
   };
 
@@ -173,6 +173,51 @@ export const ProjectDetailView: React.FC = () => {
     fetchAvailableRoles();
     fetchDocuments();
   }, [id]);
+
+  // Check if any document is currently pending or processing AI indexing
+  const hasProcessingDocs = useMemo(() => {
+    return documents.some(
+      (doc) => doc.indexingStatus === 'PENDING' || doc.indexingStatus === 'PROCESSING'
+    );
+  }, [documents]);
+
+  // Track previous document statuses to show real-time notifications on transition
+  const prevDocsStatusRef = useRef<Record<string, DocumentIndexingStatus>>({});
+
+  useEffect(() => {
+    documents.forEach((doc) => {
+      const prev = prevDocsStatusRef.current[doc.id];
+      if (prev && (prev === 'PENDING' || prev === 'PROCESSING')) {
+        if (doc.indexingStatus === 'INDEXED') {
+          showToast(
+            `✨ Đã nạp AI thành công cho "${doc.originalName}" (${doc.chunkCount || 0} đoạn)!`,
+            'success'
+          );
+        } else if (doc.indexingStatus === 'FAILED') {
+          showToast(`⚠️ Không thể lập chỉ mục AI cho "${doc.originalName}".`, 'error');
+        }
+      }
+    });
+
+    const statusMap: Record<string, DocumentIndexingStatus> = {};
+    documents.forEach((doc) => {
+      if (doc.indexingStatus) {
+        statusMap[doc.id] = doc.indexingStatus;
+      }
+    });
+    prevDocsStatusRef.current = statusMap;
+  }, [documents]);
+
+  // Auto-poll silently while any document is in PENDING or PROCESSING state
+  useEffect(() => {
+    if (!hasProcessingDocs || !id) return;
+
+    const intervalId = setInterval(() => {
+      fetchDocuments(true);
+    }, 2500);
+
+    return () => clearInterval(intervalId);
+  }, [hasProcessingDocs, id]);
 
   // Permissions helpers
   const myPermissions = useMemo(

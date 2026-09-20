@@ -6,8 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -73,15 +73,40 @@ public class TextExtractorService {
     private List<ExtractedPage> extractDocx(InputStream inputStream) throws Exception {
         try (XWPFDocument document = new XWPFDocument(inputStream)) {
             StringBuilder sb = new StringBuilder();
-            for (XWPFParagraph p : document.getParagraphs()) {
-                String text = p.getText();
-                if (text != null && !text.isBlank()) {
-                    sb.append(text).append("\n\n");
+
+            for (IBodyElement element : document.getBodyElements()) {
+                if (element instanceof XWPFParagraph p) {
+                    String text = p.getText();
+                    if (text != null && !text.isBlank()) {
+                        sb.append(text.trim()).append("\n\n");
+                    }
+                } else if (element instanceof XWPFTable table) {
+                    for (XWPFTableRow row : table.getRows()) {
+                        List<String> cellTexts = new ArrayList<>();
+                        for (XWPFTableCell cell : row.getTableCells()) {
+                            String text = cell.getText();
+                            if (text != null) {
+                                cellTexts.add(text.trim().replaceAll("\\s+", " "));
+                            }
+                        }
+                        if (!cellTexts.isEmpty() && cellTexts.stream().anyMatch(s -> !s.isBlank())) {
+                            sb.append(String.join(" | ", cellTexts)).append("\n");
+                        }
+                    }
+                    sb.append("\n");
                 }
             }
+
+            String fullText = sb.toString().trim();
+            if (fullText.isBlank()) {
+                try (XWPFWordExtractor extractor = new XWPFWordExtractor(document)) {
+                    fullText = extractor.getText();
+                }
+            }
+
             return List.of(ExtractedPage.builder()
                     .pageNumber(1)
-                    .text(sb.toString().trim())
+                    .text(fullText != null ? fullText.trim() : "")
                     .build());
         }
     }

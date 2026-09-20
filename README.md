@@ -72,6 +72,143 @@ graph TD
 
 ---
 
+## 🗄️ Sơ Đồ Cơ Sở Dữ Liệu (Database Schema / ERD)
+
+Toàn bộ hệ thống cơ sở dữ liệu được thiết kế theo chuẩn quan hệ (Relational Database) trên **PostgreSQL 16**, kết hợp cùng extension **`pgvector`** để lưu trữ và truy vấn vector tương đồng cao chiều với thuật toán chỉ mục **HNSW** (`Hierarchical Navigable Small World`):
+
+```mermaid
+erDiagram
+    %% Auth & RBAC Relations
+    USERS ||--o{ USER_ROLES : "has"
+    ROLES ||--o{ USER_ROLES : "assigned_to"
+    ROLES ||--o{ ROLE_PERMISSIONS : "contains"
+    PERMISSIONS ||--o{ ROLE_PERMISSIONS : "granted_in"
+
+    %% Project & Membership Relations
+    USERS ||--o{ PROJECT_MEMBERS : "participates_as"
+    PROJECTS ||--o{ PROJECT_MEMBERS : "has_members"
+    ROLES ||--o{ PROJECT_MEMBERS : "defines_role"
+
+    %% Document Management Relations
+    USERS ||--o{ DOCUMENTS : "uploads"
+    PROJECTS ||--o{ DOCUMENTS : "owns"
+
+    %% Vector Store & RAG Relations
+    DOCUMENTS ||--o{ DOCUMENT_CHUNKS : "split_into"
+    PROJECTS ||--o{ DOCUMENT_CHUNKS : "scoped_in"
+
+    %% Chat & Conversation Relations
+    PROJECTS ||--o{ CHAT_CONVERSATIONS : "contains"
+    USERS ||--o{ CHAT_CONVERSATIONS : "creates"
+    CHAT_CONVERSATIONS ||--o{ CHAT_MESSAGES : "has_messages"
+
+    USERS {
+        uuid id PK
+        varchar email UK "Email đăng nhập"
+        varchar password "BCrypt hashed"
+        varchar full_name "Họ và tên"
+        boolean is_active "Trạng thái hoạt động"
+        boolean is_deleted "Soft delete flag"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    ROLES {
+        uuid id PK
+        varchar name UK "Tên vai trò"
+        boolean is_system_role "Phân biệt System/Project Role"
+    }
+
+    PERMISSIONS {
+        uuid id PK
+        varchar name UK "Mã quyền hạn (e.g. DOC_CREATE)"
+        varchar description "Mô tả chi tiết quyền hạn"
+    }
+
+    USER_ROLES {
+        uuid user_id PK, FK "Khóa ngoại tham chiếu users"
+        uuid role_id PK, FK "Khóa ngoại tham chiếu roles"
+    }
+
+    ROLE_PERMISSIONS {
+        uuid role_id PK, FK "Khóa ngoại tham chiếu roles"
+        uuid permission_id PK, FK "Khóa ngoại tham chiếu permissions"
+    }
+
+    PROJECTS {
+        uuid id PK
+        varchar name "Tên dự án"
+        text description "Mô tả mục tiêu dự án"
+        uuid created_by "Người khởi tạo dự án"
+        boolean is_deleted "Soft delete flag"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    PROJECT_MEMBERS {
+        uuid project_id PK, FK "Khóa ngoại tham chiếu projects"
+        uuid user_id PK, FK "Khóa ngoại tham chiếu users"
+        uuid role_id FK "Vai trò trong dự án (Owner, Editor...)"
+        timestamp joined_at "Thời điểm tham gia dự án"
+    }
+
+    DOCUMENTS {
+        uuid id PK
+        uuid project_id FK "Dự án sở hữu tài liệu"
+        uuid uploaded_by FK "Người tải tài liệu lên"
+        varchar original_name "Tên tệp gốc"
+        varchar file_type "MIME type"
+        bigint file_size_bytes "Dung lượng tệp (bytes)"
+        varchar object_key UK "Khóa lưu trữ MinIO S3"
+        varchar indexing_status "PENDING | PROCESSING | INDEXED | FAILED"
+        integer chunk_count "Số đoạn văn bản đã bóc tách"
+        timestamp indexed_at "Thời điểm hoàn tất lập chỉ mục AI"
+        boolean is_deleted "Soft delete flag"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    DOCUMENT_CHUNKS {
+        uuid id PK
+        uuid project_id FK "Phân vùng dữ liệu theo dự án"
+        uuid document_id FK "Tài liệu gốc (ON DELETE CASCADE)"
+        integer chunk_index "Thứ tự đoạn văn bản (0, 1, 2...)"
+        text content "Nội dung đoạn văn bản gốc"
+        integer page_number "Số trang trích xuất (nếu có)"
+        vector_768 embedding "Vector Embeddings 768 chiều (HNSW index)"
+        timestamp created_at "Thời điểm tạo đoạn"
+    }
+
+    CHAT_CONVERSATIONS {
+        uuid id PK
+        uuid project_id FK "Thuộc không gian dự án"
+        uuid user_id FK "Người khởi tạo cuộc trò chuyện"
+        varchar title "Tiêu đề cuộc trò chuyện"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    CHAT_MESSAGES {
+        uuid id PK
+        uuid conversation_id FK "Cuộc trò chuyện"
+        varchar sender_type "USER hoặc ASSISTANT"
+        text content "Nội dung tin nhắn / câu trả lời"
+        text citations_json "Trích dẫn nguồn tài liệu & số trang"
+        timestamp created_at
+    }
+```
+
+### 📑 Chi Tiết 4 Nhóm Bảng Chức Năng
+
+| Phân hệ | Các bảng chính | Mô tả chức năng |
+| :--- | :--- | :--- |
+| **1. Xác thực & Phân quyền (Auth & RBAC)** | `users`, `roles`, `permissions`, `user_roles`, `role_permissions` | Quản lý định danh người dùng, mã hóa mật khẩu, phân quyền 2 tầng linh hoạt: Hệ thống (`ROLE_SYSTEM_ADMIN`, `ROLE_SYSTEM_USER`) và Dự án (`OWNER`, `MANAGER`, `EDITOR`, `VIEWER`). |
+| **2. Không gian Dự án (Workspace & Project)** | `projects`, `project_members` | Đảm bảo tính cô lập dữ liệu (Multi-tenancy isolation). Thành viên được gán vai trò theo từng dự án độc lập, hỗ trợ Soft-delete và JPA Auditing. |
+| **3. Lưu trữ & Vector AI (Documents & pgvector)** | `documents`, `document_chunks` | Quản lý siêu dữ liệu file trên MinIO S3 và lưu trữ các phân đoạn văn bản kèm vector nhúng 768 chiều sinh bởi model `nomic-embed-text`. Sử dụng chỉ mục **HNSW** (`embedding vector_cosine_ops`) để tăng tốc độ truy vấn độ tương đồng Cosine Similarity. |
+| **4. Trợ lý AI & Lịch sử hội thoại (RAG Chat Engine)** | `chat_conversations`, `chat_messages` | Lưu trữ phiên hội thoại theo ngữ cảnh từng dự án. Các câu trả lời của LLM (`llama3.2:3b`) được lưu kèm thông tin trích dẫn nguồn tài liệu (`citations_json`) phục vụ xác thực độ tin cậy. |
+
+---
+
 ## 🛠️ Công Nghệ Sử Dụng
 
 ### Backend
