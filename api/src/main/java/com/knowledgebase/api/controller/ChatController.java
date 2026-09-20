@@ -6,6 +6,8 @@ import com.knowledgebase.api.dto.response.ApiResponse;
 import com.knowledgebase.api.dto.response.ChatConversationResponse;
 import com.knowledgebase.api.dto.response.ChatMessageResponse;
 import com.knowledgebase.api.service.ai.RagChatService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "RAG Chat", description = "Endpoints for AI RAG questions, streaming answers, and conversation management")
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/projects/{projectId}/chat")

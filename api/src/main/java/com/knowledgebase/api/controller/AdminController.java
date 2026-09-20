@@ -4,6 +4,8 @@ import com.knowledgebase.api.dto.request.UpdateUserRolesRequest;
 import com.knowledgebase.api.dto.request.UpdateUserStatusRequest;
 import com.knowledgebase.api.dto.response.*;
 import com.knowledgebase.api.service.AdminService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Admin", description = "Endpoints for system administration, analytics, and user moderation")
 @RestController
 @RequestMapping("/api/v1/admin")
 @RequiredArgsConstructor

@@ -10,6 +10,7 @@
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16_(pgvector)-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![MinIO](https://img.shields.io/badge/MinIO-S3_Storage-C72C48?style=for-the-badge&logo=minio&logoColor=white)](https://min.io/)
 [![Ollama](https://img.shields.io/badge/Ollama-Local_AI-000000?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
+[![Swagger](https://img.shields.io/badge/Swagger-OpenAPI_3.1-85EA2D?style=for-the-badge&logo=swagger&logoColor=black)](http://localhost:8080/swagger-ui.html)
 [![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 
 <p align="center">
@@ -218,6 +219,7 @@ erDiagram
 - **Database**: PostgreSQL 16 with `pgvector`
 - **Object Storage**: MinIO Java SDK 8.5
 - **Document Processing**: Apache PDFBox 3.0, Apache POI 5.3
+- **API Documentation**: SpringDoc OpenAPI 3.1, Swagger UI
 - **Utilities**: MapStruct 1.6, Project Lombok
 
 ### Frontend
@@ -286,6 +288,8 @@ cd api
 
 - The backend automatically connects to PostgreSQL, activates the `pgvector` extension, creates tables, and seeds initial test data.
 - API is accessible at: `http://localhost:8080`
+- **Interactive Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI 3.1 Spec JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ---
 

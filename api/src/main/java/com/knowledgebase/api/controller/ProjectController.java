@@ -7,6 +7,8 @@ import com.knowledgebase.api.dto.request.UpdateProjectRequest;
 import com.knowledgebase.api.dto.response.*;
 import com.knowledgebase.api.service.ProjectMemberService;
 import com.knowledgebase.api.service.ProjectService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Projects", description = "Endpoints for managing project workspaces and members")
 @RestController
 @RequestMapping("/api/v1/projects")
 @RequiredArgsConstructor

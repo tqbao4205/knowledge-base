@@ -5,6 +5,8 @@ import com.knowledgebase.api.dto.response.DocumentResponse;
 import com.knowledgebase.api.dto.response.PagedResponse;
 import com.knowledgebase.api.dto.response.PresignedUrlResponse;
 import com.knowledgebase.api.service.DocumentService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
+@Tag(name = "Documents", description = "Endpoints for document management, uploads, download URLs, and AI re-indexing")
 @RestController
 @RequestMapping("/api/v1/projects/{projectId}/documents")
 @RequiredArgsConstructor
