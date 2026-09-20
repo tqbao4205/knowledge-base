@@ -1,0 +1,46 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+*.sw?
+*~
+
+# Frontend (web)
+web/node_modules/
+web/dist/
+web/dist-ssr/
+web/*.local
+web/.env.local
+web/.env.*.local
+
+# Backend (api)
+api/target/
+api/.apt_generated/
+api/.classpath
+api/.factorypath
+api/.project
+api/.settings/
+api/.springBeans
+api/.sts4-cache
+api/build/
+api/.mvn/wrapper/maven-wrapper.jar
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*

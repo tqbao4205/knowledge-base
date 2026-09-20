@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "SF Pro", "Helvetica Neue", "Inter", sans-serif;
+  color-scheme: light;
+  --apple-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f5f5f7;
+  color: #1d1d1f;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  letter-spacing: -0.01em;
+}
+
+/* Apple Light Frosted Glass Utilities */
+.apple-glass {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.apple-glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.03);
+  transition: all 0.25s var(--apple-ease);
+}
+
+.apple-glass-card:hover {
+  background: #ffffff;
+  border-color: rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.08);
+}
+
+.apple-glass-subtle {
+  background: rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.apple-pill-active {
+  background: #ffffff;
+  color: #1d1d1f;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* macOS Traffic Lights */
+.traffic-light-red {
+  background-color: #ff5f56;
+  border: 1px solid #e0443e;
+}
+.traffic-light-yellow {
+  background-color: #ffbd2e;
+  border: 1px solid #dea123;
+}
+.traffic-light-green {
+  background-color: #27c93f;
+  border: 1px solid #1aab29;
+}
+
+/* Minimalist macOS Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Spring Animations */
+@keyframes appleSpringIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-apple-spring {
+  animation: appleSpringIn 0.35s var(--apple-ease) forwards;
+}
+
+/* macOS Top-Right Notification Slide In */
+@keyframes macNotificationSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(40px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.animate-mac-notification {
+  animation: macNotificationSlideIn 0.35s var(--apple-ease) forwards;
+}
+
+/* Toast Countdown Progress Shrink */
+@keyframes shrinkWidth {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+/* Apple Lock Screen Shake (on wrong credentials) */
+@keyframes appleShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-apple-shake {
+  animation: appleShake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* DOCX Preview In-Browser Rendering */
+.docx-render-target {
+  font-family: Calibri, 'Times New Roman', -apple-system, sans-serif;
+  color: #111827;
+  word-break: break-word;
+}
+
+.docx-render-target section.docx {
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  width: 100% !important;
+  min-height: auto !important;
+}
+
+.docx-render-target table {
+  border-collapse: collapse;
+  width: 100% !important;
+  margin: 1rem 0;
+}
+
+.docx-render-target td,
+.docx-render-target th {
+  border: 1px solid #d1d5db;
+  padding: 6px 10px;
+}
+
+.docx-render-target p {
+  margin-bottom: 0.6rem;
+  line-height: 1.6;
+}
+
+.docx-render-target img {
+  max-width: 100%;
+  height: auto;
+}
+
+

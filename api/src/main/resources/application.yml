@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: knowledge-base-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/knowledge_base
+    username: kb_user
+    password: kb_password
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 105MB
+
+# MinIO Configuration
+minio:
+  url: http://localhost:9000
+  access-key: admin
+  secret-key: password123
+  bucket-name: knowledge-base
+
+# JWT Configuration
+jwt:
+  secret: Y2hhbmdlbWVjaGFuZ2VtZWNoYW5nZW1lY2hhbmdlbWVjaGFuZ2VtZTIwMjQ=
+  access-token-expiration: 900000 # 15 minutes in ms
+  refresh-token-expiration: 604800000 # 7 days in ms
+
+# Ollama Configuration (Local AI)
+ollama:
+  base-url: http://localhost:11434
+  chat-model: llama3.2:3b
+  embedding-model: nomic-embed-text
