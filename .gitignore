@@ -16,8 +16,9 @@ Thumbs.db
 *.sw?
 *~
 
-# Frontend (web)
-web/node_modules/
+# Node modules
+node_modules/
+**/node_modules/
 web/dist/
 web/dist-ssr/
 web/*.local
