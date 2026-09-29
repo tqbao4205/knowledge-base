@@ -17,6 +17,21 @@
   A self-hosted enterprise document management platform featuring multi-tiered Role-Based Access Control (RBAC), S3-compatible cloud storage, and privacy-preserving local Retrieval-Augmented Generation (RAG) AI assistant operating entirely on-premise/offline.
 </p>
 
+### 📺 Video Demo Trải Nghiệm Ứng Dụng (Full App & Local RAG AI)
+
+https://github.com/user-attachments/assets/demo_video
+
+<video src="report_assets/demo_video/knowledge_base_app_demo.mp4" controls="controls" muted="muted" poster="report_assets/demo_video/demo_poster.png" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+  <source src="report_assets/demo_video/knowledge_base_app_demo.mp4" type="video/mp4">
+  <source src="report_assets/demo_video/knowledge_base_app_demo.webm" type="video/webm">
+  Trình duyệt của bạn không hỗ trợ thẻ video. Bạn có thể xem trực tiếp tệp: <a href="report_assets/demo_video/knowledge_base_app_demo.mp4">knowledge_base_app_demo.mp4</a>
+</video>
+
+<p align="center">
+  <a href="report_assets/demo_video/knowledge_base_app_demo.mp4">▶️ <b>Xem / Tải Video Demo (MP4 Full HD)</b></a> &nbsp;|&nbsp; 
+  <a href="report_assets/demo_video/knowledge_base_app_demo.webm">🌐 <b>Xem Video WebM</b></a>
+</p>
+
 </div>
 
 ---

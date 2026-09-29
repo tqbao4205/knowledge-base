@@ -1,0 +1,648 @@
+[
+  {
+    "file": "01_auth_login.png",
+    "name": "Authentication - Login (Admin)",
+    "method": "POST",
+    "url": "http://localhost:8080/api/v1/auth/login",
+    "reqHeaders": {
+      "Content-Type": "application/json"
+    },
+    "reqBody": {
+      "email": "admin@knowledgebase.com",
+      "password": "••••••••"
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Đăng nhập thành công",
+      "data": {
+        "user": {
+          "id": "5287aad2-2cf9-4e5d-acdc-2180af257689",
+          "email": "admin@knowledgebase.com",
+          "fullName": "System Administrator",
+          "systemRoles": [
+            "ROLE_SYSTEM_ADMIN"
+          ],
+          "permissions": [
+            "PROJECT_UPDATE",
+            "DOC_UPDATE",
+            "PROJECT_DELETE",
+            "DOC_CREATE",
+            "PROJECT_MANAGE_MEMBERS",
+            "PROJECT_CREATE",
+            "DOC_DELETE",
+            "DOC_READ",
+            "PROJECT_READ"
+          ]
+        },
+        "tokens": {
+          "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInJvbGVzIjpbIlJPTEVfU1lTVEVNX0FETUlOIl0sInBlcm1pc3Npb25zIjpbIkRPQ19ERUxFVEUiLCJQUk9KRUNUX01BTkFHRV9NRU1CRVJTIiwiUFJPSkVDVF9DUkVBVEUiLCJET0NfVVBEQVRFIiwiUFJPSkVDVF9ERUxFVEUiLCJQUk9KRUNUX1JFQUQiLCJET0NfUkVBRCIsIkRPQ19DUkVBVEUiLCJQUk9KRUNUX1VQREFURSJdLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTA2NjA1NzF9.nE8ekLDEnFXUNj8noO0DAb8ymrn-runByKMc8DgOXmY",
+          "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInR5cGUiOiJSRUZSRVNIIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTEyNjQ0NzF9.SqyK7Mx07HYxLXJuMjJM-Y3l_iMGEbdQql5NtIVbrXA"
+        }
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Đăng nhập thành công\",\"data\":{\"user\":{\"id\":\"5287aad2-2cf9-4e5d-acdc-2180af257689\",\"email\":\"admin@knowledgebase.com\",\"fullName\":\"System Administrator\",\"systemRoles\":[\"ROLE_SYSTEM_ADMIN\"],\"permissions\":[\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_DELETE\",\"DOC_CREATE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_CREATE\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]},\"tokens\":{\"accessToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInJvbGVzIjpbIlJPTEVfU1lTVEVNX0FETUlOIl0sInBlcm1pc3Npb25zIjpbIkRPQ19ERUxFVEUiLCJQUk9KRUNUX01BTkFHRV9NRU1CRVJTIiwiUFJPSkVDVF9DUkVBVEUiLCJET0NfVVBEQVRFIiwiUFJPSkVDVF9ERUxFVEUiLCJQUk9KRUNUX1JFQUQiLCJET0NfUkVBRCIsIkRPQ19DUkVBVEUiLCJQUk9KRUNUX1VQREFURSJdLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTA2NjA1NzF9.nE8ekLDEnFXUNj8noO0DAb8ymrn-runByKMc8DgOXmY\",\"refreshToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInR5cGUiOiJSRUZSRVNIIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTEyNjQ0NzF9.SqyK7Mx07HYxLXJuMjJM-Y3l_iMGEbdQql5NtIVbrXA\"}}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "02_auth_me.png",
+    "name": "Authentication - Get Current User Profile",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/auth/me",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy thông tin người dùng thành công",
+      "data": {
+        "id": "5287aad2-2cf9-4e5d-acdc-2180af257689",
+        "email": "admin@knowledgebase.com",
+        "fullName": "System Administrator",
+        "systemRoles": [
+          "ROLE_SYSTEM_ADMIN"
+        ],
+        "permissions": [
+          "PROJECT_UPDATE",
+          "DOC_UPDATE",
+          "PROJECT_DELETE",
+          "DOC_CREATE",
+          "PROJECT_MANAGE_MEMBERS",
+          "PROJECT_CREATE",
+          "DOC_DELETE",
+          "DOC_READ",
+          "PROJECT_READ"
+        ]
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy thông tin người dùng thành công\",\"data\":{\"id\":\"5287aad2-2cf9-4e5d-acdc-2180af257689\",\"email\":\"admin@knowledgebase.com\",\"fullName\":\"System Administrator\",\"systemRoles\":[\"ROLE_SYSTEM_ADMIN\"],\"permissions\":[\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_DELETE\",\"DOC_CREATE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_CREATE\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "03_auth_refresh.png",
+    "name": "Authentication - Refresh Access Token",
+    "method": "POST",
+    "url": "http://localhost:8080/api/v1/auth/refresh",
+    "reqHeaders": {
+      "Content-Type": "application/json"
+    },
+    "reqBody": {
+      "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Refresh token thành công",
+      "data": {
+        "accessToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInJvbGVzIjpbIlJPTEVfU1lTVEVNX0FETUlOIl0sInBlcm1pc3Npb25zIjpbIlBST0pFQ1RfUkVBRCIsIkRPQ19ERUxFVEUiLCJET0NfVVBEQVRFIiwiUFJPSkVDVF9NQU5BR0VfTUVNQkVSUyIsIlBST0pFQ1RfVVBEQVRFIiwiRE9DX1JFQUQiLCJQUk9KRUNUX0NSRUFURSIsIkRPQ19DUkVBVEUiLCJQUk9KRUNUX0RFTEVURSJdLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTA2NjA1NzF9.f_zbfNZTAFThFvQztTFnUFJYZxqqCYOVgVoTkuphp-M",
+        "refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInR5cGUiOiJSRUZSRVNIIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTEyNjQ0NzF9.SqyK7Mx07HYxLXJuMjJM-Y3l_iMGEbdQql5NtIVbrXA"
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Refresh token thành công\",\"data\":{\"accessToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInJvbGVzIjpbIlJPTEVfU1lTVEVNX0FETUlOIl0sInBlcm1pc3Npb25zIjpbIlBST0pFQ1RfUkVBRCIsIkRPQ19ERUxFVEUiLCJET0NfVVBEQVRFIiwiUFJPSkVDVF9NQU5BR0VfTUVNQkVSUyIsIlBST0pFQ1RfVVBEQVRFIiwiRE9DX1JFQUQiLCJQUk9KRUNUX0NSRUFURSIsIkRPQ19DUkVBVEUiLCJQUk9KRUNUX0RFTEVURSJdLCJ0eXBlIjoiQUNDRVNTIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTA2NjA1NzF9.f_zbfNZTAFThFvQztTFnUFJYZxqqCYOVgVoTkuphp-M\",\"refreshToken\":\"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBrbm93bGVkZ2ViYXNlLmNvbSIsInVzZXJJZCI6IjUyODdhYWQyLTJjZjktNGU1ZC1hY2RjLTIxODBhZjI1NzY4OSIsInR5cGUiOiJSRUZSRVNIIiwiaWF0IjoxNzkwNjU5NjcxLCJleHAiOjE3OTEyNjQ0NzF9.SqyK7Mx07HYxLXJuMjJM-Y3l_iMGEbdQql5NtIVbrXA\"}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "04_admin_dashboard_stats.png",
+    "name": "Admin - Overview Dashboard Analytics & Stats",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/admin/dashboard/stats",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy chỉ số thống kê hệ thống thành công",
+      "data": {
+        "totalUsers": 5,
+        "bannedUsers": 0,
+        "totalProjects": 2,
+        "totalDocuments": 2,
+        "totalChunks": 7,
+        "documentStatus": {
+          "indexed": 2,
+          "processing": 0,
+          "failed": 0
+        }
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy chỉ số thống kê hệ thống thành công\",\"data\":{\"totalUsers\":5,\"bannedUsers\":0,\"totalProjects\":2,\"totalDocuments\":2,\"totalChunks\":7,\"documentStatus\":{\"indexed\":2,\"processing\":0,\"failed\":0}}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "05_admin_users_list.png",
+    "name": "Admin - List All Users & Account Status",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/admin/users",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách người dùng thành công",
+      "data": {
+        "content": [
+          {
+            "id": "ffa09453-ad81-4997-8772-8d558c107e13",
+            "email": "viewer@knowledgebase.com",
+            "fullName": "Phạm Thị Viewer",
+            "isActive": true,
+            "createdAt": "2026-09-20T20:21:10.903015",
+            "roles": [
+              "ROLE_SYSTEM_USER"
+            ]
+          },
+          {
+            "id": "1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe",
+            "email": "editor@knowledgebase.com",
+            "fullName": "Lê Văn Editor",
+            "isActive": true,
+            "createdAt": "2026-09-20T20:21:10.814",
+            "roles": [
+              "ROLE_SYSTEM_USER"
+            ]
+          },
+          {
+            "id": "4b836e05-5499-4fef-997c-7873784ab713",
+            "email": "manager@knowledgebase.com",
+            "fullName": "Trần Thị Manager",
+            "isActive": true,
+            "createdAt": "2026-09-20T20:21:10.724553",
+            "roles": [
+              "ROLE_SYSTEM_USER"
+            ]
+          },
+          {
+            "id": "06917066-e221-479d-b6cb-0721bdd13789",
+            "email": "owner@knowledgebase.com",
+            "fullName": "Nguyễn Văn Owner",
+            "isActive": true,
+            "createdAt": "2026-09-20T20:21:10.633425",
+            "roles": [
+              "ROLE_SYSTEM_USER"
+            ]
+          },
+          {
+            "id": "5287aad2-2cf9-4e5d-acdc-2180af257689",
+            "email": "admin@knowledgebase.com",
+            "fullName": "System Administrator",
+            "isActive": true,
+            "createdAt": "2026-09-20T20:21:10.538363",
+            "roles": [
+              "ROLE_SYSTEM_ADMIN"
+            ]
+          }
+        ],
+        "page": 0,
+        "size": 20,
+        "totalElements": 5,
+        "totalPages": 1,
+        "last": true
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách người dùng thành công\",\"data\":{\"content\":[{\"id\":\"ffa09453-ad81-4997-8772-8d558c107e13\",\"email\":\"viewer@knowledgebase.com\",\"fullName\":\"Phạm Thị Viewer\",\"isActive\":true,\"createdAt\":\"2026-09-20T20:21:10.903015\",\"roles\":[\"ROLE_SYSTEM_USER\"]},{\"id\":\"1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe\",\"email\":\"editor@knowledgebase.com\",\"fullName\":\"Lê Văn Editor\",\"isActive\":true,\"createdAt\":\"2026-09-20T20:21:10.814\",\"roles\":[\"ROLE_SYSTEM_USER\"]},{\"id\":\"4b836e05-5499-4fef-997c-7873784ab713\",\"email\":\"manager@knowledgebase.com\",\"fullName\":\"Trần Thị Manager\",\"isActive\":true,\"createdAt\":\"2026-09-20T20:21:10.724553\",\"roles\":[\"ROLE_SYSTEM_USER\"]},{\"id\":\"06917066-e221-479d-b6cb-0721bdd13789\",\"email\":\"owner@knowledgebase.com\",\"fullName\":\"Nguyễn Văn Owner\",\"isActive\":true,\"createdAt\":\"2026-09-20T20:21:10.633425\",\"roles\":[\"ROLE_SYSTEM_USER\"]},{\"id\":\"5287aad2-2cf9-4e5d-acdc-2180af257689\",\"email\":\"admin@knowledgebase.com\",\"fullName\":\"System Administrator\",\"isActive\":true,\"createdAt\":\"2026-09-20T20:21:10.538363\",\"roles\":[\"ROLE_SYSTEM_ADMIN\"]}],\"page\":0,\"size\":20,\"totalElements\":5,\"totalPages\":1,\"last\":true}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "06_project_roles.png",
+    "name": "Projects - Get Project Roles Directory",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/roles",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách vai trò dự án thành công",
+      "data": [
+        {
+          "id": "deaf0062-e868-4d8f-bcee-74ca99b05f16",
+          "name": "Owner",
+          "isSystemRole": false,
+          "permissions": [
+            "PROJECT_UPDATE",
+            "DOC_UPDATE",
+            "PROJECT_DELETE",
+            "DOC_CREATE",
+            "PROJECT_MANAGE_MEMBERS",
+            "PROJECT_CREATE",
+            "DOC_DELETE",
+            "DOC_READ",
+            "PROJECT_READ"
+          ]
+        },
+        {
+          "id": "11e4d223-fbda-4f19-9596-9a7a28d478ce",
+          "name": "Manager",
+          "isSystemRole": false,
+          "permissions": [
+            "PROJECT_UPDATE",
+            "DOC_UPDATE",
+            "DOC_CREATE",
+            "PROJECT_MANAGE_MEMBERS",
+            "DOC_DELETE",
+            "DOC_READ",
+            "PROJECT_READ"
+          ]
+        },
+        {
+          "id": "08861e4b-44cf-48ff-810b-c7b4946f6b51",
+          "name": "Editor",
+          "isSystemRole": false,
+          "permissions": [
+            "DOC_UPDATE",
+            "DOC_CREATE",
+            "DOC_DELETE",
+            "DOC_READ",
+            "PROJECT_READ"
+          ]
+        },
+        {
+          "id": "a06faa8c-cc1f-4849-b4df-e7ade3a8f706",
+          "name": "Viewer",
+          "isSystemRole": false,
+          "permissions": [
+            "DOC_READ",
+            "PROJECT_READ"
+          ]
+        }
+      ]
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách vai trò dự án thành công\",\"data\":[{\"id\":\"deaf0062-e868-4d8f-bcee-74ca99b05f16\",\"name\":\"Owner\",\"isSystemRole\":false,\"permissions\":[\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_DELETE\",\"DOC_CREATE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_CREATE\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]},{\"id\":\"11e4d223-fbda-4f19-9596-9a7a28d478ce\",\"name\":\"Manager\",\"isSystemRole\":false,\"permissions\":[\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"DOC_CREATE\",\"PROJECT_MANAGE_MEMBERS\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]},{\"id\":\"08861e4b-44cf-48ff-810b-c7b4946f6b51\",\"name\":\"Editor\",\"isSystemRole\":false,\"permissions\":[\"DOC_UPDATE\",\"DOC_CREATE\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]},{\"id\":\"a06faa8c-cc1f-4849-b4df-e7ade3a8f706\",\"name\":\"Viewer\",\"isSystemRole\":false,\"permissions\":[\"DOC_READ\",\"PROJECT_READ\"]}]}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "07_projects_list.png",
+    "name": "Projects - List Accessible Projects",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách dự án thành công",
+      "data": {
+        "content": [
+          {
+            "id": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+            "name": "Test Project",
+            "description": "Test",
+            "createdAt": "2026-09-20T20:26:50.713886",
+            "updatedAt": "2026-09-20T20:26:50.713886",
+            "memberCount": 3,
+            "myRole": "ROLE_SYSTEM_ADMIN",
+            "myPermissions": [
+              "DOC_DELETE",
+              "PROJECT_MANAGE_MEMBERS",
+              "PROJECT_UPDATE",
+              "DOC_UPDATE",
+              "PROJECT_READ",
+              "DOC_READ",
+              "PROJECT_CREATE",
+              "DOC_CREATE",
+              "PROJECT_DELETE"
+            ]
+          },
+          {
+            "id": "9cb9a16d-4c11-4ec6-b56d-939b2883c14f",
+            "name": "Dự Án Mẫu Đầy Đủ Phân Quyền (RBAC Demo)",
+            "description": "Dự án mẫu kiểm thử tất cả các vai trò (Owner, Manager, Editor, Viewer) và trải nghiệm tải lên, xem trước, tải về tài liệu qua MinIO S3.",
+            "createdAt": "2026-09-20T20:21:10.915355",
+            "updatedAt": "2026-09-20T20:21:10.915355",
+            "memberCount": 4,
+            "myRole": "ROLE_SYSTEM_ADMIN",
+            "myPermissions": [
+              "DOC_DELETE",
+              "PROJECT_MANAGE_MEMBERS",
+              "PROJECT_UPDATE",
+              "DOC_UPDATE",
+              "PROJECT_READ",
+              "DOC_READ",
+              "PROJECT_CREATE",
+              "DOC_CREATE",
+              "PROJECT_DELETE"
+            ]
+          }
+        ],
+        "page": 0,
+        "size": 20,
+        "totalElements": 2,
+        "totalPages": 1,
+        "last": true
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách dự án thành công\",\"data\":{\"content\":[{\"id\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"name\":\"Test Project\",\"description\":\"Test\",\"createdAt\":\"2026-09-20T20:26:50.713886\",\"updatedAt\":\"2026-09-20T20:26:50.713886\",\"memberCount\":3,\"myRole\":\"ROLE_SYSTEM_ADMIN\",\"myPermissions\":[\"DOC_DELETE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_READ\",\"DOC_READ\",\"PROJECT_CREATE\",\"DOC_CREATE\",\"PROJECT_DELETE\"]},{\"id\":\"9cb9a16d-4c11-4ec6-b56d-939b2883c14f\",\"name\":\"Dự Án Mẫu Đầy Đủ Phân Quyền (RBAC Demo)\",\"description\":\"Dự án mẫu kiểm thử tất cả các vai trò (Owner, Manager, Editor, Viewer) và trải nghiệm tải lên, xem trước, tải về tài liệu qua MinIO S3.\",\"createdAt\":\"2026-09-20T20:21:10.915355\",\"updatedAt\":\"2026-09-20T20:21:10.915355\",\"memberCount\":4,\"myRole\":\"ROLE_SYSTEM_ADMIN\",\"myPermissions\":[\"DOC_DELETE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_READ\",\"DOC_READ\",\"PROJECT_CREATE\",\"DOC_CREATE\",\"PROJECT_DELETE\"]}],\"page\":0,\"size\":20,\"totalElements\":2,\"totalPages\":1,\"last\":true}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "08_project_create.png",
+    "name": "Projects - Create New Workspace",
+    "method": "POST",
+    "url": "http://localhost:8080/api/v1/projects",
+    "reqHeaders": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "reqBody": {
+      "name": "Postman Auto Test Project 739",
+      "description": "Workspace created automatically during Postman API automated test execution."
+    },
+    "statusCode": 201,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Tạo dự án thành công",
+      "data": {
+        "id": "334806e4-ab32-400b-bb78-8c661785d5b3",
+        "name": "Postman Auto Test Project 739",
+        "description": "Workspace created automatically during Postman API automated test execution.",
+        "createdAt": "2026-09-29T12:27:51.218176",
+        "updatedAt": "2026-09-29T12:27:51.218176",
+        "memberCount": 1,
+        "myRole": "Owner",
+        "myPermissions": [
+          "PROJECT_UPDATE",
+          "DOC_UPDATE",
+          "DOC_CREATE",
+          "PROJECT_DELETE",
+          "PROJECT_MANAGE_MEMBERS",
+          "PROJECT_CREATE",
+          "DOC_DELETE",
+          "DOC_READ",
+          "PROJECT_READ"
+        ]
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Tạo dự án thành công\",\"data\":{\"id\":\"334806e4-ab32-400b-bb78-8c661785d5b3\",\"name\":\"Postman Auto Test Project 739\",\"description\":\"Workspace created automatically during Postman API automated test execution.\",\"createdAt\":\"2026-09-29T12:27:51.218176\",\"updatedAt\":\"2026-09-29T12:27:51.218176\",\"memberCount\":1,\"myRole\":\"Owner\",\"myPermissions\":[\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"DOC_CREATE\",\"PROJECT_DELETE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_CREATE\",\"DOC_DELETE\",\"DOC_READ\",\"PROJECT_READ\"]}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "09_project_detail.png",
+    "name": "Projects - Get Project By ID",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy thông tin dự án thành công",
+      "data": {
+        "project": {
+          "id": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+          "name": "Test Project",
+          "description": "Test",
+          "createdAt": "2026-09-20T20:26:50.713886",
+          "updatedAt": "2026-09-20T20:26:50.713886",
+          "memberCount": 3,
+          "myRole": "ROLE_SYSTEM_ADMIN",
+          "myPermissions": [
+            "DOC_DELETE",
+            "PROJECT_MANAGE_MEMBERS",
+            "PROJECT_UPDATE",
+            "DOC_UPDATE",
+            "PROJECT_READ",
+            "DOC_READ",
+            "PROJECT_CREATE",
+            "DOC_CREATE",
+            "PROJECT_DELETE"
+          ]
+        },
+        "members": [
+          {
+            "userId": "06917066-e221-479d-b6cb-0721bdd13789",
+            "email": "owner@knowledgebase.com",
+            "fullName": "Nguyễn Văn Owner",
+            "roleId": "deaf0062-e868-4d8f-bcee-74ca99b05f16",
+            "roleName": "Owner",
+            "joinedAt": "2026-09-20T20:26:50.717003"
+          },
+          {
+            "userId": "1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe",
+            "email": "editor@knowledgebase.com",
+            "fullName": "Lê Văn Editor",
+            "roleId": "08861e4b-44cf-48ff-810b-c7b4946f6b51",
+            "roleName": "Editor",
+            "joinedAt": "2026-09-20T20:27:12.98801"
+          },
+          {
+            "userId": "ffa09453-ad81-4997-8772-8d558c107e13",
+            "email": "viewer@knowledgebase.com",
+            "fullName": "Phạm Thị Viewer",
+            "roleId": "a06faa8c-cc1f-4849-b4df-e7ade3a8f706",
+            "roleName": "Viewer",
+            "joinedAt": "2026-09-20T20:27:26.7155"
+          }
+        ]
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy thông tin dự án thành công\",\"data\":{\"project\":{\"id\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"name\":\"Test Project\",\"description\":\"Test\",\"createdAt\":\"2026-09-20T20:26:50.713886\",\"updatedAt\":\"2026-09-20T20:26:50.713886\",\"memberCount\":3,\"myRole\":\"ROLE_SYSTEM_ADMIN\",\"myPermissions\":[\"DOC_DELETE\",\"PROJECT_MANAGE_MEMBERS\",\"PROJECT_UPDATE\",\"DOC_UPDATE\",\"PROJECT_READ\",\"DOC_READ\",\"PROJECT_CREATE\",\"DOC_CREATE\",\"PROJECT_DELETE\"]},\"members\":[{\"userId\":\"06917066-e221-479d-b6cb-0721bdd13789\",\"email\":\"owner@knowledgebase.com\",\"fullName\":\"Nguyễn Văn Owner\",\"roleId\":\"deaf0062-e868-4d8f-bcee-74ca99b05f16\",\"roleName\":\"Owner\",\"joinedAt\":\"2026-09-20T20:26:50.717003\"},{\"userId\":\"1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe\",\"email\":\"editor@knowledgebase.com\",\"fullName\":\"Lê Văn Editor\",\"roleId\":\"08861e4b-44cf-48ff-810b-c7b4946f6b51\",\"roleName\":\"Editor\",\"joinedAt\":\"2026-09-20T20:27:12.98801\"},{\"userId\":\"ffa09453-ad81-4997-8772-8d558c107e13\",\"email\":\"viewer@knowledgebase.com\",\"fullName\":\"Phạm Thị Viewer\",\"roleId\":\"a06faa8c-cc1f-4849-b4df-e7ade3a8f706\",\"roleName\":\"Viewer\",\"joinedAt\":\"2026-09-20T20:27:26.7155\"}]}}",
+    "responseTimeMs": 1
+  },
+  {
+    "file": "10_project_members.png",
+    "name": "Projects - List Project Workspace Members",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/members",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách thành viên thành công",
+      "data": [
+        {
+          "userId": "06917066-e221-479d-b6cb-0721bdd13789",
+          "email": "owner@knowledgebase.com",
+          "fullName": "Nguyễn Văn Owner",
+          "roleId": "deaf0062-e868-4d8f-bcee-74ca99b05f16",
+          "roleName": "Owner",
+          "joinedAt": "2026-09-20T20:26:50.717003"
+        },
+        {
+          "userId": "1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe",
+          "email": "editor@knowledgebase.com",
+          "fullName": "Lê Văn Editor",
+          "roleId": "08861e4b-44cf-48ff-810b-c7b4946f6b51",
+          "roleName": "Editor",
+          "joinedAt": "2026-09-20T20:27:12.98801"
+        },
+        {
+          "userId": "ffa09453-ad81-4997-8772-8d558c107e13",
+          "email": "viewer@knowledgebase.com",
+          "fullName": "Phạm Thị Viewer",
+          "roleId": "a06faa8c-cc1f-4849-b4df-e7ade3a8f706",
+          "roleName": "Viewer",
+          "joinedAt": "2026-09-20T20:27:26.7155"
+        }
+      ]
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách thành viên thành công\",\"data\":[{\"userId\":\"06917066-e221-479d-b6cb-0721bdd13789\",\"email\":\"owner@knowledgebase.com\",\"fullName\":\"Nguyễn Văn Owner\",\"roleId\":\"deaf0062-e868-4d8f-bcee-74ca99b05f16\",\"roleName\":\"Owner\",\"joinedAt\":\"2026-09-20T20:26:50.717003\"},{\"userId\":\"1b89daa6-5fb2-4ea5-9a18-e11cb5befbfe\",\"email\":\"editor@knowledgebase.com\",\"fullName\":\"Lê Văn Editor\",\"roleId\":\"08861e4b-44cf-48ff-810b-c7b4946f6b51\",\"roleName\":\"Editor\",\"joinedAt\":\"2026-09-20T20:27:12.98801\"},{\"userId\":\"ffa09453-ad81-4997-8772-8d558c107e13\",\"email\":\"viewer@knowledgebase.com\",\"fullName\":\"Phạm Thị Viewer\",\"roleId\":\"a06faa8c-cc1f-4849-b4df-e7ade3a8f706\",\"roleName\":\"Viewer\",\"joinedAt\":\"2026-09-20T20:27:26.7155\"}]}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "11_project_documents.png",
+    "name": "Documents - List Workspace Documents & AI Status",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/documents",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách tài liệu thành công",
+      "data": {
+        "content": [
+          {
+            "id": "9786b094-cb9c-49d4-a3f1-5735c9a71f14",
+            "projectId": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+            "originalName": "Speaking.docx",
+            "fileType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+            "fileSizeBytes": 12266,
+            "uploadedBy": {
+              "id": "06917066-e221-479d-b6cb-0721bdd13789",
+              "email": "owner@knowledgebase.com",
+              "fullName": "Nguyễn Văn Owner"
+            },
+            "indexingStatus": "INDEXED",
+            "chunkCount": 5,
+            "indexedAt": "2026-09-20T20:48:06.847194",
+            "createdAt": "2026-09-20T20:38:29.930837"
+          }
+        ],
+        "page": 0,
+        "size": 20,
+        "totalElements": 1,
+        "totalPages": 1,
+        "last": true
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách tài liệu thành công\",\"data\":{\"content\":[{\"id\":\"9786b094-cb9c-49d4-a3f1-5735c9a71f14\",\"projectId\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"originalName\":\"Speaking.docx\",\"fileType\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"fileSizeBytes\":12266,\"uploadedBy\":{\"id\":\"06917066-e221-479d-b6cb-0721bdd13789\",\"email\":\"owner@knowledgebase.com\",\"fullName\":\"Nguyễn Văn Owner\"},\"indexingStatus\":\"INDEXED\",\"chunkCount\":5,\"indexedAt\":\"2026-09-20T20:48:06.847194\",\"createdAt\":\"2026-09-20T20:38:29.930837\"}],\"page\":0,\"size\":20,\"totalElements\":1,\"totalPages\":1,\"last\":true}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "12_document_download_url.png",
+    "name": "Documents - Generate S3 Presigned Download/Preview URL",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/documents/9786b094-cb9c-49d4-a3f1-5735c9a71f14/download-url",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Tạo đường dẫn tải tài liệu thành công",
+      "data": {
+        "url": "http://localhost:9000/knowledge-base/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/51b91752-5d47-4c9e-923f-4d400b9c4890_Speaking.docx?response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27Speaking.docx&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260929%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260929T052751Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=fd4fa74d4e834858d144d3f188cb4a82bbb63b022309f8f3292ef8fbb137441c",
+        "expiresInSeconds": 300
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Tạo đường dẫn tải tài liệu thành công\",\"data\":{\"url\":\"http://localhost:9000/knowledge-base/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/51b91752-5d47-4c9e-923f-4d400b9c4890_Speaking.docx?response-content-disposition=inline%3B%20filename%2A%3DUTF-8%27%27Speaking.docx&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260929%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260929T052751Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=fd4fa74d4e834858d144d3f188cb4a82bbb63b022309f8f3292ef8fbb137441c\",\"expiresInSeconds\":300}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "13_chat_conversations.png",
+    "name": "AI Chat - List Conversation Threads",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/chat/conversations",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy danh sách hội thoại thành công",
+      "data": [
+        {
+          "id": "f6677e91-511c-4e4b-8f69-3f892886906d",
+          "projectId": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+          "title": "Hỏi các chủ đề",
+          "createdAt": "2026-09-20T20:48:46.261987",
+          "updatedAt": "2026-09-20T20:48:58.270413"
+        },
+        {
+          "id": "9bd9410d-3b30-409c-9780-d36a6a391d2a",
+          "projectId": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+          "title": "Hỏi về W7 Sport",
+          "createdAt": "2026-09-20T20:48:23.754973",
+          "updatedAt": "2026-09-20T20:48:30.402653"
+        },
+        {
+          "id": "7e3655e0-d56d-45b4-808a-7704c21fd76d",
+          "projectId": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+          "title": "Kiểm thử RAG",
+          "createdAt": "2026-09-20T20:31:32.682356",
+          "updatedAt": "2026-09-20T20:31:57.205999"
+        }
+      ]
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy danh sách hội thoại thành công\",\"data\":[{\"id\":\"f6677e91-511c-4e4b-8f69-3f892886906d\",\"projectId\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"title\":\"Hỏi các chủ đề\",\"createdAt\":\"2026-09-20T20:48:46.261987\",\"updatedAt\":\"2026-09-20T20:48:58.270413\"},{\"id\":\"9bd9410d-3b30-409c-9780-d36a6a391d2a\",\"projectId\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"title\":\"Hỏi về W7 Sport\",\"createdAt\":\"2026-09-20T20:48:23.754973\",\"updatedAt\":\"2026-09-20T20:48:30.402653\"},{\"id\":\"7e3655e0-d56d-45b4-808a-7704c21fd76d\",\"projectId\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"title\":\"Kiểm thử RAG\",\"createdAt\":\"2026-09-20T20:31:32.682356\",\"updatedAt\":\"2026-09-20T20:31:57.205999\"}]}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "14_chat_create_conversation.png",
+    "name": "AI Chat - Create New Conversation Thread",
+    "method": "POST",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/chat/conversations",
+    "reqHeaders": {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "reqBody": {
+      "title": "Postman Automated RAG Chat Session"
+    },
+    "statusCode": 201,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Tạo hội thoại thành công",
+      "data": {
+        "id": "5505ffd4-2f1f-43a3-80f2-f6663d8040e7",
+        "projectId": "eda21886-7f0c-4830-bd0c-2bd70585ad0b",
+        "title": "Postman Automated RAG Chat Session",
+        "createdAt": "2026-09-29T12:27:51.405136",
+        "updatedAt": "2026-09-29T12:27:51.405144"
+      }
+    },
+    "raw": "{\"success\":true,\"message\":\"Tạo hội thoại thành công\",\"data\":{\"id\":\"5505ffd4-2f1f-43a3-80f2-f6663d8040e7\",\"projectId\":\"eda21886-7f0c-4830-bd0c-2bd70585ad0b\",\"title\":\"Postman Automated RAG Chat Session\",\"createdAt\":\"2026-09-29T12:27:51.405136\",\"updatedAt\":\"2026-09-29T12:27:51.405144\"}}",
+    "responseTimeMs": 0
+  },
+  {
+    "file": "15_chat_messages.png",
+    "name": "AI Chat - Retrieve Message History & Citations",
+    "method": "GET",
+    "url": "http://localhost:8080/api/v1/projects/eda21886-7f0c-4830-bd0c-2bd70585ad0b/chat/conversations/5505ffd4-2f1f-43a3-80f2-f6663d8040e7/messages",
+    "reqHeaders": {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJz..."
+    },
+    "statusCode": 200,
+    "statusMessage": "",
+    "respData": {
+      "success": true,
+      "message": "Lấy lịch sử tin nhắn thành công",
+      "data": []
+    },
+    "raw": "{\"success\":true,\"message\":\"Lấy lịch sử tin nhắn thành công\",\"data\":[]}",
+    "responseTimeMs": 0
+  }
+]
